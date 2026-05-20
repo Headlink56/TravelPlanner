@@ -230,12 +230,17 @@
         let gapiInited = false;
         let gisInited = false;
 
-        function gapiLoaded() { gapi.load('client', intializeGapiClient); }
-        async function intializeGapiClient() {
-            await gapi.client.init({ apiKey: API_KEY, discoveryDocs: DISCOVERY_DOCS });
-            gapiInited = true;
-            checkInitialization();
-            checkSetup();
+        function gapiLoaded() { gapi.load('client', initializeGapiClient); }
+        async function initializeGapiClient() {
+            try {
+                await gapi.client.init({ apiKey: API_KEY, discoveryDocs: DISCOVERY_DOCS });
+                gapiInited = true;
+            } catch (err) {
+                console.error("GAPI Init Error:", err);
+            } finally {
+                checkInitialization();
+                checkSetup();
+            }
         }
 
         function checkInitialization() {
