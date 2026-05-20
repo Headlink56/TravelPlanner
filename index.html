@@ -214,6 +214,14 @@
 
     <!-- GOOGLE API LOGIC -->
     <script>
+        function activateLinks(text) {
+  if (!text) return '';
+  // Regular expression to detect strings starting with http:// or https://
+  const urlRegex = /(https?:\/\/[^\s]+)/g;
+  return text.replace(urlRegex, function(url) {
+    return `<a href="${url}" target="_blank" class="text-blue-600 underline hover:text-blue-800 break-all">${url}</a>`;
+  });
+}
         // CONFIGURATION: PASTE YOUR KEYS HERE
         const CLIENT_ID = '465999896742-bvnb76118i8g8m3r5eab5h8he09u9g77.apps.googleusercontent.com';
         const API_KEY = 'AIzaSyBr8d1d2M84UdTFop4_P6LgfwoNxGsfSa0';
@@ -380,9 +388,9 @@
                             </div>` : '';
 
                         const descriptionHtml = event.description ? `
-                            <div class="mt-2 pt-2 border-t border-blue-100/50 text-[10px] text-slate-600 leading-relaxed">
-                                ${event.description}
-                            </div>` : '';
+                         <div class="mt-2 pt-2 border-t border-blue-100/50 text-[10px] text-slate-600 leading-relaxed">
+                         ${activateLinks(event.description)}
+                         </div>` : '';
 
                         const div = document.createElement('div');
                         div.className = "bg-blue-50 p-4 rounded-xl border border-blue-100 shadow-sm";
