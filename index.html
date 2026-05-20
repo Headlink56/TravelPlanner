@@ -220,9 +220,10 @@
         const AI_API_KEY = 'AQ.Ab8RN6I_YrAE3vsMzKZBLNPK9D6cx9myRVu_jBND5q5w0TzrYw'; 
         const DISCOVERY_DOCS = [
             "https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest",
-            "https://www.googleapis.com/discovery/v1/apis/sheets/v4/rest"
+            "https://www.googleapis.com/discovery/v1/apis/sheets/v4/rest",
+            "https://www.googleapis.com/discovery/v1/apis/gmail/v1/rest"
         ];
-        const SCOPES = "https://www.googleapis.com/auth/calendar.readonly https://www.googleapis.com/auth/spreadsheets.readonly";
+        const SCOPES = "https://www.googleapis.com/auth/calendar.readonly https://www.googleapis.com/auth/spreadsheets.readonly https://www.googleapis.com/auth/gmail.readonly";
         const SPREADSHEET_ID = '1jghXxfXv8ia-S3re7PYwL3YR96jvcvyES33hb_KX-No';
 
         let tokenClient;
@@ -384,6 +385,19 @@
                                 ${event.description}
                             </div>` : '';
 
+                        const isGmailSource = event.source && event.source.url && event.source.url.includes('mail.google.com');
+                        const sourceUrl = isGmailSource ? event.source.url : event.htmlLink;
+                        const sourceLabel = isGmailSource ? 'View Email' : 'View Source';
+                        const sourceIcon = isGmailSource 
+                            ? `<svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>`
+                            : `<svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>`;
+
+                        const sourceLinkHtml = sourceUrl ? `
+                            <a href="${sourceUrl}" target="_blank" class="text-[10px] font-bold text-slate-400 hover:text-red-500 flex items-center gap-1 uppercase transition-colors">
+                                ${sourceIcon}
+                                ${sourceLabel}
+                            </a>` : '';
+
                         const div = document.createElement('div');
                         div.className = "bg-blue-50 p-4 rounded-xl border border-blue-100 shadow-sm";
                         div.innerHTML = `
@@ -396,6 +410,7 @@
                             ${locationHtml}
                             ${descriptionHtml}
                             <div class="mt-3 pt-3 border-t border-blue-100/30 flex justify-between items-center">
+                                ${sourceLinkHtml}
                                 <button onclick="toggleComment('${eventKey}')" class="text-[10px] font-bold text-slate-400 hover:text-blue-600 flex items-center gap-1 uppercase transition-colors">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
                                     Comment
