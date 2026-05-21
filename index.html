@@ -53,7 +53,7 @@
             <p class="text-xs text-slate-500">June 6 — June 26, 2026</p>
         </div>
         <div class="flex flex-col items-end gap-1">
-            <button id="auth-button" onclick="handleAuthClick()" disabled class="bg-blue-600 hover:bg-blue-700 text-white text-[10px] px-3 py-1.5 rounded-full font-bold flex items-center gap-1 transition-colors shadow-sm opacity-50 cursor-not-allowed">
+            <button id="auth-button" onclick="handleAuthClick()" disabled class="bg-blue-600 hover:bg-blue-700 text-white text-[14px] px-3 py-1.5 rounded-full font-bold flex items-center gap-1 transition-colors shadow-sm opacity-50 cursor-not-allowed">
                 Login with Google
             </button>
             <span id="user-display" class="text-[9px] text-slate-400 font-medium tracking-tight italic">Authorization Required</span>
@@ -80,7 +80,7 @@
                         <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>
                         Update
                     </button>
-                    <button onclick="exportItineraryToPdf()" class="text-[10px] font-bold text-slate-600 bg-slate-50 px-2 py-1 rounded border border-slate-100 flex items-center gap-1 hover:bg-slate-100 transition-colors">
+                    <button onclick="exportItineraryToPdf()" class="text-[14px] font-bold text-slate-600 bg-slate-50 px-2 py-1 rounded border border-slate-100 flex items-center gap-1 hover:bg-slate-100 transition-colors">
                         <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
                         Export PDF
                     </button>
@@ -89,7 +89,7 @@
 
             <div id="calendar-events-container" class="space-y-4">
                 <!-- Live Calendar Events will prepend here -->
-                <div class="bg-white p-4 rounded-xl border border-slate-100 shadow-sm opacity-50 italic text-[10px] text-center">
+                <div class="bg-white p-4 rounded-xl border border-slate-100 shadow-sm opacity-50 italic text-[14px] text-center">
                     Authorize and click "Update from Calendar" to pull live events...
                 </div>
 
@@ -104,19 +104,19 @@
                             Comment
                         </button>
                     </div>
-                    <div id="display-p_flight" class="mt-2 text-[10px] text-slate-600 italic bg-slate-50 p-2 rounded hidden"></div>
+                    <div id="display-p_flight" class="mt-2 text-[14px] text-slate-600 italic bg-slate-50 p-2 rounded hidden"></div>
                     <div id="panel-p_flight" class="hidden mt-2 space-y-2">
-                        <textarea id="input-p_flight" class="w-full text-[10px] p-2 rounded border border-slate-200 outline-none h-16" placeholder="Write a comment..."></textarea>
+                        <textarea id="input-p_flight" class="w-full text-[14px] p-2 rounded border border-slate-200 outline-none h-16" placeholder="Write a comment..."></textarea>
                         <button onclick="saveActivityComment('p_flight')" class="bg-cyan-600 text-white text-[9px] px-3 py-1 rounded-lg font-bold uppercase">Save</button>
                     </div>
                 </div>
 
                 <div class="bg-white p-4 rounded-xl border-l-4 border-emerald-400 shadow-sm">
-                    <div class="flex justify-between text-[10px] font-bold text-emerald-600 mb-1 uppercase">Accommodation</div>
+                    <div class="flex justify-between text-[14px] font-bold text-emerald-600 mb-1 uppercase">Accommodation</div>
                     <h4 class="font-bold text-slate-800">Island Colony Waikiki</h4>
                     <p class="text-xs text-slate-500">June 6 - 10 Stay</p>
                     <div class="mt-3 pt-3 border-t border-slate-50 flex justify-between items-center">
-                        <button onclick="toggleComment('p_hotel')" class="text-[10px] font-bold text-slate-400 hover:text-emerald-600 flex items-center gap-1 uppercase transition-colors">
+                        <button onclick="toggleComment('p_hotel')" class="text-[14px] font-bold text-slate-400 hover:text-emerald-600 flex items-center gap-1 uppercase transition-colors">
                             <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
                             Comment
                         </button>
@@ -125,9 +125,9 @@
                             AI Nearby
                         </button>
                     </div>
-                    <div id="display-p_hotel" class="mt-2 text-[10px] text-slate-600 italic bg-slate-50 p-2 rounded hidden"></div>
+                    <div id="display-p_hotel" class="mt-2 text-[14px] text-slate-600 italic bg-slate-50 p-2 rounded hidden"></div>
                     <div id="panel-p_hotel" class="hidden mt-2 space-y-2">
-                        <textarea id="input-p_hotel" class="w-full text-[10px] p-2 rounded border border-slate-200 outline-none h-16" placeholder="Write a comment..."></textarea>
+                        <textarea id="input-p_hotel" class="w-full text-[14px] p-2 rounded border border-slate-200 outline-none h-16" placeholder="Write a comment..."></textarea>
                         <button onclick="saveActivityComment('p_hotel')" class="bg-emerald-600 text-white text-[9px] px-3 py-1 rounded-lg font-bold uppercase">Save</button>
                     </div>
                 </div>
@@ -138,18 +138,18 @@
         <section id="budget-content" class="hidden">
             <div class="flex justify-between items-center mb-4">
                 <h2 class="font-semibold text-lg">Financial Actuals</h2>
-                <button id="budget-sync-btn" onclick="fetchSheetActuals()" disabled class="text-[10px] font-bold text-blue-600 bg-blue-50 px-3 py-1 rounded-full border border-blue-100 opacity-50 cursor-not-allowed">Fetch Actuals</button>
+                <button id="budget-sync-btn" onclick="fetchSheetActuals()" disabled class="text-[14px] font-bold text-blue-600 bg-blue-50 px-3 py-1 rounded-full border border-blue-100 opacity-50 cursor-not-allowed">Fetch Actuals</button>
             </div>
             
             <div id="live-budget-summary" class="bg-slate-900 text-white p-6 rounded-2xl shadow-lg mb-6 text-center">
-                <p class="text-[10px] opacity-60 mb-2 uppercase tracking-widest font-bold">Total Actual Spend</p>
+                <p class="text-[14px] opacity-60 mb-2 uppercase tracking-widest font-bold">Total Actual Spend</p>
                 <h3 id="total-spend-display" class="text-3xl font-bold text-slate-500">--.--</h3>
             </div>
 
             <div class="overflow-x-auto rounded-xl border bg-white shadow-sm">
                 <table class="w-full text-left border-collapse">
                     <thead class="bg-slate-50 border-b">
-                        <tr class="text-[10px] font-bold text-slate-400 uppercase">
+                        <tr class="text-[14px] font-bold text-slate-400 uppercase">
                             <th class="px-4 py-3">Activity Date</th>
                             <th class="px-4 py-3">Category</th>
                             <th class="px-4 py-3">Item</th>
@@ -171,7 +171,7 @@
                 <h3 id="diary-title" class="font-bold text-slate-700 mb-3 text-xs uppercase tracking-wider italic">Vlog Note Entry</h3>
                 <textarea id="diary-text" class="w-full border-none focus:ring-0 text-sm h-32 placeholder-slate-300 bg-slate-50 rounded-xl p-3" placeholder="What happened today? Link to your Photos here."></textarea>
                 <div class="flex justify-between items-center mt-4 pt-4 border-t border-slate-100">
-                    <button class="text-blue-600 flex items-center gap-1 text-[10px] font-bold bg-blue-50 px-3 py-2 rounded-lg uppercase">Attach Photo Reference</button>
+                    <button class="text-blue-600 flex items-center gap-1 text-[12px] font-bold bg-blue-50 px-3 py-2 rounded-lg uppercase">Attach Photo Reference</button>
                     <button onclick="saveNote()" class="bg-blue-600 text-white px-5 py-2.5 rounded-xl text-xs font-bold shadow-md">Save Highlight</button>
                 </div>
             </div>
