@@ -13,7 +13,7 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
         body { font-family: 'Inter', sans-serif; background-color: #f8fafc; }
-        .glass { background: rgba(255, 255, 255, 0.9); backdrop-filter: blur(10px); }
+        .glass { background: rgba(255, 255, 255, 0.9); backdrop-filter: blur(12px); }
         .tab-active { border-bottom: 2px solid #3b82f6; color: #3b82f6; }
         .hide-scroll::-webkit-scrollbar { display: none; }
         .sync-animation { animation: spin 1s linear infinite; }
@@ -28,14 +28,14 @@
             <h3 id="ai-search-title" class="font-bold text-slate-800 text-center text-lg">AI Suggestions</h3>
             <svg id="ai-spinner" class="text-blue-600 sync-animation" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/><path d="M3 12a9 9 0 0 0 9 9 9.75 9.75 0 0 0 6.74-2.74L21 16"/><path d="M16 16h5v5"/></svg>
             <p id="ai-search-status" class="text-sm text-slate-600 text-center">Searching for attractions near...</p>
-            <div id="ai-search-results" class="text-xs text-slate-700 leading-relaxed max-h-60 overflow-y-auto w-full p-2 bg-slate-50 rounded hidden"></div>
-            <button onclick="hideAiSearchOverlay()" class="bg-blue-600 text-white text-[10px] px-4 py-2 rounded-full font-bold uppercase mt-4">Close</button>
+            <div id="ai-search-results" class="text-sm text-slate-700 leading-relaxed max-h-60 overflow-y-auto w-full p-2 bg-slate-50 rounded hidden"></div>
+            <button onclick="hideAiSearchOverlay()" class="bg-blue-600 text-white text-[12px] px-4 py-2 rounded-full font-bold uppercase mt-4">Close</button>
         </div>
     </div>
 
     <!-- SETUP INSTRUCTIONS OVERLAY (Only visible if Keys are missing) -->
     <div id="setup-banner" class="bg-amber-50 border-b border-amber-200 p-3 text-center hidden">
-        <p class="text-[10px] text-amber-700 font-bold uppercase tracking-tight">Step 4: Paste your API Key & Client ID into the code below to enable live sync</p>
+        <p class="text-[12px] text-amber-700 font-bold uppercase tracking-tight">Step 4: Paste your API Key & Client ID into the code below to enable live sync</p>
     </div>
 
     <!-- Sync Overlay -->
@@ -50,7 +50,7 @@
     <header class="glass sticky top-0 z-50 p-4 border-b flex justify-between items-center">
         <div>
             <h1 class="text-xl font-bold text-slate-800">Trip to Asia & Hawaii</h1>
-            <p class="text-xs text-slate-500">June 6 — June 26, 2026</p>
+            <p class="text-sm text-slate-500">June 6 — June 26, 2026</p>
         </div>
         <div class="flex flex-col items-end gap-1">
             <button id="auth-button" onclick="handleAuthClick()" disabled class="bg-blue-600 hover:bg-blue-700 text-white text-[14px] px-3 py-1.5 rounded-full font-bold flex items-center gap-1 transition-colors shadow-sm opacity-50 cursor-not-allowed">
@@ -95,9 +95,9 @@
 
                 <!-- Verified Itinerary Placeholders -->
                 <div class="bg-white p-4 rounded-xl border-l-4 border-cyan-400 shadow-sm">
-                    <div class="flex justify-between text-[10px] font-bold text-cyan-600 mb-1 uppercase">Flight Record</div>
+                    <div class="flex justify-between text-[12px] font-bold text-cyan-600 mb-1 uppercase">Flight Record</div>
                     <h4 class="font-bold text-slate-800">LAX → HNL (United)</h4>
-                    <p class="text-xs text-slate-500">June 6 • 18:45 Departure</p>
+                    <p class="text-sm text-slate-500">June 6 • 18:45 Departure</p>
                     <div class="mt-3 pt-3 border-t border-slate-50 flex justify-between items-center">
                         <button onclick="toggleComment('p_flight')" class="text-[14px] font-bold text-slate-400 hover:text-cyan-600 flex items-center gap-1 uppercase transition-colors">
                             <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
@@ -114,7 +114,7 @@
                 <div class="bg-white p-4 rounded-xl border-l-4 border-emerald-400 shadow-sm">
                     <div class="flex justify-between text-[14px] font-bold text-emerald-600 mb-1 uppercase">Accommodation</div>
                     <h4 class="font-bold text-slate-800">Island Colony Waikiki</h4>
-                    <p class="text-xs text-slate-500">June 6 - 10 Stay</p>
+                    <p class="text-sm text-slate-500">June 6 - 10 Stay</p>
                     <div class="mt-3 pt-3 border-t border-slate-50 flex justify-between items-center">
                         <button onclick="toggleComment('p_hotel')" class="text-[14px] font-bold text-slate-400 hover:text-emerald-600 flex items-center gap-1 uppercase transition-colors">
                             <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
@@ -168,11 +168,11 @@
         <section id="diary-content" class="hidden">
             <h2 class="font-semibold text-lg mb-4">Daily Diary & Vlog Log</h2>
             <div class="bg-white p-5 rounded-2xl shadow-md border-2 border-blue-50 mb-6">
-                <h3 id="diary-title" class="font-bold text-slate-700 mb-3 text-xs uppercase tracking-wider italic">Vlog Note Entry</h3>
+                <h3 id="diary-title" class="font-bold text-slate-700 mb-3 text-sm uppercase tracking-wider italic">Vlog Note Entry</h3>
                 <textarea id="diary-text" class="w-full border-none focus:ring-0 text-sm h-32 placeholder-slate-300 bg-slate-50 rounded-xl p-3" placeholder="What happened today? Link to your Photos here."></textarea>
                 <div class="flex justify-between items-center mt-4 pt-4 border-t border-slate-100">
                     <button class="text-blue-600 flex items-center gap-1 text-[14px] font-bold bg-blue-50 px-3 py-2 rounded-lg uppercase">Attach Photo Reference</button>
-                    <button onclick="saveNote()" class="bg-blue-600 text-white px-5 py-2.5 rounded-xl text-xs font-bold shadow-md">Save Highlight</button>
+                    <button onclick="saveNote()" class="bg-blue-600 text-white px-5 py-2.5 rounded-xl text-sm font-bold shadow-md">Save Highlight</button>
                 </div>
             </div>
         </section>
@@ -181,7 +181,7 @@
         <section id="ai-content" class="hidden">
             <h2 class="font-semibold text-lg mb-4">AI Travel Insights</h2>
             <div class="bg-blue-50 p-4 rounded-xl border border-blue-200">
-                <h4 class="font-bold text-xs text-blue-700 mb-2 uppercase tracking-tight">Visa & Transit: 240-Hour Rule</h4>
+                <h4 class="font-bold text-sm text-blue-700 mb-2 uppercase tracking-tight">Visa & Transit: 240-Hour Rule</h4>
                 <p class="text-[11px] text-slate-700 leading-relaxed italic">
                     Note: Your entry via **Guangzhou Baiyun (CAN)** on June 22nd is fully eligible for China's 240-hour visa-free transit policy. Ensure you show your confirmed onward ticket to **Hong Kong West Kowloon** for processing.
                 </p>
@@ -381,7 +381,7 @@
                         const isLodging = isLodgingEvent(event);
                         const locationForAI = event.location ? event.location.split(',')[0].trim() : event.summary;
                         const aiButtonHtml = isLodging && event.location ? `
-                            <button onclick="showNearbyAttractions('${locationForAI}')" class="text-[10px] font-bold text-slate-400 hover:text-purple-600 flex items-center gap-1 uppercase transition-colors">
+                            <button onclick="showNearbyAttractions('${locationForAI}')" class="text-[12px] font-bold text-slate-400 hover:text-purple-600 flex items-center gap-1 uppercase transition-colors">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
                                 AI Nearby
                             </button>` : '';
@@ -399,7 +399,7 @@
                             </div>` : '';
 
                         const descriptionHtml = event.description ? `
-                         <div class="mt-2 pt-2 border-t border-blue-100/50 text-[10px] text-slate-600 leading-relaxed">
+                         <div class="mt-2 pt-2 border-t border-blue-100/50 text-[12px] text-slate-600 leading-relaxed">
                          ${activateLinks(event.description)}
                          </div>` : '';
 
@@ -415,17 +415,17 @@
                             ${locationHtml}
                             ${descriptionHtml}
                             <div class="mt-3 pt-3 border-t border-blue-100/30 flex justify-between items-center">
-                                <button onclick="toggleComment('${eventKey}')" class="text-[10px] font-bold text-slate-400 hover:text-blue-600 flex items-center gap-1 uppercase transition-colors">
+                                <button onclick="toggleComment('${eventKey}')" class="text-[12px] font-bold text-slate-400 hover:text-blue-600 flex items-center gap-1 uppercase transition-colors">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
                                     Comment
                                 </button>
                                 ${aiButtonHtml}
                             </div>
-                            <div id="display-${eventKey}" class="mt-2 text-[10px] text-slate-600 italic bg-white/50 p-2 rounded ${savedComment ? '' : 'hidden'}">
+                            <div id="display-${eventKey}" class="mt-2 text-[12px] text-slate-600 italic bg-white/50 p-2 rounded ${savedComment ? '' : 'hidden'}">
                                 "${savedComment}"
                             </div>
                             <div id="panel-${eventKey}" class="hidden mt-2 space-y-2">
-                                <textarea id="input-${eventKey}" class="w-full text-[10px] p-2 rounded border border-blue-200 outline-none h-16 focus:ring-1 focus:ring-blue-400" placeholder="Add a note...">${savedComment}</textarea>
+                                <textarea id="input-${eventKey}" class="w-full text-[12px] p-2 rounded border border-blue-200 outline-none h-16 focus:ring-1 focus:ring-blue-400" placeholder="Add a note...">${savedComment}</textarea>
                                 <button onclick="saveActivityComment('${eventKey}')" class="bg-blue-600 text-white text-[9px] px-3 py-1 rounded-lg font-bold uppercase shadow-sm">Save Note</button>
                             </div>
                         `;
@@ -546,7 +546,7 @@
                 resultsDiv.classList.remove('hidden');
                 resultsDiv.innerHTML = `
                     <div class="p-3 bg-red-50 border border-red-100 rounded-lg">
-                        <p class="text-red-600 font-bold text-[10px] mb-1">TRIP ADVISOR AI ERROR</p>
+                        <p class="text-red-600 font-bold text-[12px] mb-1">TRIP ADVISOR AI ERROR</p>
                         <p class="text-red-500 font-mono text-[9px] leading-tight">${err.message}</p>
                         <p class="mt-2 text-[9px] text-slate-500 italic">Troubleshooting: Go to Google Cloud Console > APIs & Services > Library > Search for "Generative Language API" and click Enable.</p>
                     </div>
