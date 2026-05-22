@@ -1,0 +1,23 @@
+# API Keys and Configuration
+config.js
+.env
+.env.local
+.env.*.local
+
+# Node
+node_modules/
+*.log
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Build artifacts
+dist/
+build/
