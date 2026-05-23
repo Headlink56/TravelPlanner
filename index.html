@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Asia & Hawaii 2026 Travel Companion</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google API Client Libraries -->
+    <script async defer src="https://apis.google.com/js/api.js" onload="gapiLoaded()"></script>
+    <script async defer src="https://accounts.google.com/gsi/client" onload="gisLoaded()"></script>
     <!-- PDF Export Library -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     <style>
@@ -30,9 +33,9 @@
         </div>
     </div>
 
-    <!-- SETUP INSTRUCTIONS OVERLAY (Only visible if Proxy is not configured) -->
+    <!-- SETUP INSTRUCTIONS OVERLAY (Only visible if Keys are missing) -->
     <div id="setup-banner" class="bg-amber-50 border-b border-amber-200 p-3 text-center hidden">
-        <p class="text-[12px] text-amber-700 font-bold uppercase tracking-tight">Step 1: Add your Apps Script proxy URL to <code>config.js</code> so the page can sync without embedding secret keys.</p>
+        <p class="text-[12px] text-amber-700 font-bold uppercase tracking-tight">Step 4: Paste your API Key & Client ID into the code below to enable live sync</p>
     </div>
 
     <!-- Sync Overlay -->
@@ -50,8 +53,8 @@
             <p class="text-sm text-slate-500">June 6 — June 26, 2026</p>
         </div>
         <div class="flex flex-col items-end gap-1">
-            <button id="auth-button" onclick="handleAuthClick()" class="bg-blue-600 hover:bg-blue-700 text-white text-[14px] px-3 py-1.5 rounded-full font-bold flex items-center gap-1 transition-colors shadow-sm">
-                Sync Status
+            <button id="auth-button" onclick="handleAuthClick()" disabled class="bg-blue-600 hover:bg-blue-700 text-white text-[14px] px-3 py-1.5 rounded-full font-bold flex items-center gap-1 transition-colors shadow-sm opacity-50 cursor-not-allowed">
+                Login with Google
             </button>
             <span id="user-display" class="text-[9px] text-slate-400 font-medium tracking-tight italic">Authorization Required</span>
         </div>
@@ -73,7 +76,7 @@
             <div class="flex justify-between items-center mb-4">
                 <h2 class="font-semibold text-lg">Travel Plan</h2>
                 <div class="flex gap-2">
-                    <button id="calendar-sync-btn" onclick="fetchCalendarEvents()" class="text-[14px] font-bold text-blue-600 bg-blue-50 px-2 py-1 rounded border border-blue-100 flex items-center gap-1">
+                    <button id="calendar-sync-btn" onclick="fetchCalendarEvents()" disabled class="text-[14px] font-bold text-blue-600 bg-blue-50 px-2 py-1 rounded border border-blue-100 flex items-center gap-1 opacity-50 cursor-not-allowed">
                         <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>
                         Update
                     </button>
@@ -135,7 +138,7 @@
         <section id="budget-content" class="hidden">
             <div class="flex justify-between items-center mb-4">
                 <h2 class="font-semibold text-lg">Financial Actuals</h2>
-                <button id="budget-sync-btn" onclick="fetchSheetActuals()" class="text-[14px] font-bold text-blue-600 bg-blue-50 px-3 py-1 rounded-full border border-blue-100">Fetch Actuals</button>
+                <button id="budget-sync-btn" onclick="fetchSheetActuals()" disabled class="text-[14px] font-bold text-blue-600 bg-blue-50 px-3 py-1 rounded-full border border-blue-100 opacity-50 cursor-not-allowed">Fetch Actuals</button>
             </div>
             
             <div id="live-budget-summary" class="bg-slate-900 text-white p-6 rounded-2xl shadow-lg mb-6 text-center">
@@ -196,7 +199,7 @@
             <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
             <span class="text-[9px]">Budget</span>
         </button>
-        <button id="nav-auth-btn" onclick="handleAuthClick()" class="bg-blue-600 w-12 h-12 rounded-full flex items-center justify-center text-white shadow-lg -mt-10 border-4 border-white transition-transform active:scale-95">
+        <button id="nav-auth-btn" onclick="handleAuthClick()" disabled class="bg-blue-600 w-12 h-12 rounded-full flex items-center justify-center text-white shadow-lg -mt-10 border-4 border-white transition-transform active:scale-95 opacity-50 cursor-not-allowed">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>
         </button>
         <button onclick="switchTab('diary')" class="flex flex-col items-center gap-1 text-slate-400">
@@ -210,7 +213,6 @@
     </div>
 
     <!-- GOOGLE API LOGIC -->
-    <script src="config.js"></script>
     <script>
         function activateLinks(text) {
   if (!text) return '';
@@ -220,31 +222,97 @@
     return `<a href="${url}" target="_blank" class="text-blue-600 underline hover:text-blue-800 break-all">${url}</a>`;
   });
 }
+// CONFIGURATION: PASTE YOUR KEYS HERE
+        const CLIENT_ID = '465999896742-bvnb76118i8g8m3r5eab5h8he09u9g77.apps.googleusercontent.com';
+        const API_KEY = 'AIzaSyBr8d1d2M84UdTFop4_P6LgfwoNxGsfSa0';
+        
+        // Update this line right here with your working Gemini key:
+        const AI_API_KEY = 'AIzaSyCAuo3hp8CVUyOmEWirVbbosQbSHISpTDo'; 
+        
+        const DISCOVERY_DOCS = [
+            "https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest",
+            "https://www.googleapis.com/discovery/v1/apis/sheets/v4/rest"
+        ];
+        const SCOPES = "https://www.googleapis.com/auth/calendar.readonly https://www.googleapis.com/auth/spreadsheets";
+        const SPREADSHEET_ID = '1jghXxfXv8ia-S3re7PYwL3YR96jvcvyES33hb_KX-No';
 
-        const API_CONFIG = window.API_CONFIG || {};
-        const PROXY_URL = API_CONFIG.PROXY_URL || 'https://script.google.com/a/macros/headlink.com/s/AKfycbzf_m5-K4fXhhV7sJjOqxAgACNnoZTlEkQKdiCHmqJzilc_Y7IFYhQgMhQs132Aff-O/exec';
-
+        let tokenClient;
+        let gapiInited = false;
+        let gisInited = false;
         let sheetComments = {};
         let eventCommentMeta = {};
 
-        function checkSetup() {
-            console.log("Current Proxy URL:", PROXY_URL);
+        function gapiLoaded() { gapi.load('client', initializeGapiClient); }
+        async function initializeGapiClient() {
+            try {
+                await gapi.client.init({ apiKey: API_KEY, discoveryDocs: DISCOVERY_DOCS });
+                gapiInited = true;
+            } catch (err) {
+                console.error("GAPI Init Error:", err);
+            } finally {
+                checkInitialization();
+                checkSetup();
+            }
         }
 
-        function handleAuthClick() {
-            // Opening the Proxy URL directly allows the user to grant permissions to the script 
-            // This is REQUIRED before background fetches will work.
-            window.open(PROXY_URL, '_blank');
-            document.getElementById('user-display').innerText = 'Proxy Connected';
+        function checkInitialization() {
+            if (gapiInited && gisInited) {
+                const btnIds = ['auth-button', 'calendar-sync-btn', 'budget-sync-btn', 'nav-auth-btn'];
+                btnIds.forEach(id => {
+                    const btn = document.getElementById(id);
+                    if (btn) {
+                        btn.disabled = false;
+                        btn.classList.remove('opacity-50', 'cursor-not-allowed');
+                    }
+                });
+            }
+        }
+
+        function checkSetup() {
+            if (API_KEY.startsWith('AIza') && CLIENT_ID.includes('apps.googleusercontent.com')) {
+                document.getElementById('setup-banner').classList.add('hidden');
+            } else {
+                document.getElementById('setup-banner').classList.remove('hidden');
+            }
+        }
+
+        function gisLoaded() {
+            tokenClient = google.accounts.oauth2.initTokenClient({ client_id: CLIENT_ID, scope: SCOPES, callback: '', });
+            gisInited = true;
+            checkInitialization();
+        }
+
+        function handleAuthClick(callback) {
+            if (!tokenClient) return;
+
+            // If we already have a valid token, just run the requested action
+            if (gapi.client.getToken() !== null) {
+                if (typeof callback === 'function') callback();
+                else fetchSheetActuals();
+                return;
+            }
+
+            tokenClient.callback = async (resp) => {
+                if (resp.error !== undefined) { throw (resp); }
+                document.getElementById('auth-button').innerText = 'Sync Active';
+                document.getElementById('user-display').innerText = 'Account Connected';
+                
+                if (typeof callback === 'function') await callback();
+                else await fetchSheetActuals();
+            };
+            // Removing prompt: 'consent' allows the session to persist across syncs
+            tokenClient.requestAccessToken({ prompt: '' });
         }
 
         async function fetchSheetActuals() {
+            if (!gapi.client.getToken()) return handleAuthClick(fetchSheetActuals);
             toggleSyncOverlay(true, "Fetching Budget Rows...");
             try {
-                const response = await fetch(`${PROXY_URL}?action=getBudget`);
-                if (!response.ok) throw new Error(`HTTP Error: ${response.status}`);
-                
-                const values = await response.json();
+                const response = await gapi.client.sheets.spreadsheets.values.get({
+                    spreadsheetId: SPREADSHEET_ID,
+                    range: 'A1:G100', // Pulling from the first sheet with a wider range to find headers automatically
+                });
+                const values = response.result.values;
                 if (!values || values.length === 0) return alert("No data found in your sheet.");
 
                 // Dynamically find column indices by scanning the header row (Case Insensitive)
@@ -286,22 +354,21 @@
 
                 document.getElementById('total-spend-display').innerText = `$${total.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
                 document.getElementById('total-spend-display').classList.replace('text-slate-500', 'text-emerald-400');
-            } catch (err) { 
-                console.error("Sheet Sync Error:", err);
-                alert("Sheet Sync Error: " + err.message + ". Check console for details."); 
-            }
+            } catch (err) { alert("Sheet Sync Error: " + err.message); }
             toggleSyncOverlay(false);
         }
 
         async function loadCommentsFromSheet() {
+            if (!gapi.client.getToken()) return {};
+
             try {
-                const response = await fetch(`${PROXY_URL}?action=getComments`);
-                const rows = await response.json();
-                if (!rows || rows.length <= 1) return {};
-                
+                const response = await gapi.client.sheets.spreadsheets.values.get({
+                    spreadsheetId: SPREADSHEET_ID,
+                    range: 'comments!A2:E',
+                });
+                const rows = response.result.values || [];
                 const map = {};
-                rows.forEach((row, idx) => {
-                    if (idx === 0) return; // Skip headers
+                rows.forEach(row => {
                     const eventKey = (row[0] || '').toString();
                     const summary = (row[1] || '').toString();
                     const startDate = (row[2] || '').toString();
@@ -321,30 +388,44 @@
         }
 
         async function syncCommentToSheet(eventKey, comment) {
+            if (!gapi.client.getToken()) return;
             const meta = eventCommentMeta[eventKey] || {};
+            const now = new Date().toISOString();
             try {
-                const response = await fetch(PROXY_URL, {
-                    method: 'POST',
-                    mode: 'no-cors', // Apps Script requires no-cors for simple POST to avoid OPTIONS preflight
-                    body: JSON.stringify({
-                        action: 'saveComment',
-                        key: eventKey,
-                        summary: meta.summary || '',
-                        date: meta.startDate || '',
-                        comment: comment
-                    })
+                await gapi.client.sheets.spreadsheets.values.append({
+                    spreadsheetId: SPREADSHEET_ID,
+                    range: 'comments!A:E',
+                    valueInputOption: 'USER_ENTERED',
+                    insertDataOption: 'INSERT_ROWS',
+                    resource: {
+                        values: [[
+                            eventKey,
+                            meta.summary || '',
+                            meta.startDate || '',
+                            comment,
+                            now
+                        ]]
+                    }
                 });
-            } catch (err) { console.error('Failed to save comment:', err); }
+            } catch (err) {
+                console.error('Failed to save comment to sheet:', err);
+            }
         }
 
         async function fetchCalendarEvents() {
-            toggleSyncOverlay(true, "Syncing Calendar via Proxy...");
+            if (!gapi.client.getToken()) return handleAuthClick(fetchCalendarEvents);
+            toggleSyncOverlay(true, "Scanning pete@headlink.com Calendar...");
             sheetComments = await loadCommentsFromSheet();
             try {
-                const response = await fetch(`${PROXY_URL}?action=getCalendar`);
-                if (!response.ok) throw new Error(`HTTP Error: ${response.status}`);
-
-                const events = await response.json();
+                const response = await gapi.client.calendar.events.list({
+                    calendarId: 'primary',
+                    timeMin: '2026-06-06T00:00:00Z',
+                    timeMax: '2026-06-27T00:00:00Z',
+                    showDeleted: false,
+                    singleEvents: true,                
+                    orderBy: 'startTime',
+                });
+                const events = response.result.items;
                 const container = document.getElementById('calendar-events-container');
                 if (events.length > 0) {
                     container.innerHTML = ""; // Clear placeholders
@@ -416,10 +497,7 @@
                         container.appendChild(div);
                     });
                 }
-            } catch (err) { 
-                console.error("Calendar Sync Error:", err);
-                alert("Calendar Sync Error: " + err.message + ". Check console for details."); 
-            }
+            } catch (err) { alert("Calendar Sync Error: " + err.message); }
             toggleSyncOverlay(false);
         }
 
@@ -497,14 +575,15 @@
 
             try {
                 const prompt = `I am staying at ${location}. Suggest 5 specific tourist attractions, landmarks, or local hidden gems within a 3-mile radius. Provide a very brief, exciting description for each. Format as a bulleted list.`;
-
-                const response = await fetch(PROXY_URL, {
+                
+                const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${AI_API_KEY}`, {
                     method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({
-                        action: 'gemini',
-                        prompt: prompt
+                        contents: [{ parts: [{ text: prompt }] }]
                     })
                 });
+
                 const data = await response.json();
                 
                 if (data.error) {
@@ -581,7 +660,6 @@
                     }
                 }
             });
-            checkSetup();
         });
     </script>
 </body>
