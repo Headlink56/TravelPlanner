@@ -7,5 +7,5 @@
 // 3. The index.html will automatically load this file and call the proxy
 
 const API_CONFIG = {
-    PROXY_URL: 'https://script.google.com/macros/s/YOUR_DEPLOYED_WEB_APP_ID/exec'
+    PROXY_URL: 'https://script.google.com/macros/s/AKfycbzf_m5-K4fXhhV7sJjOqxAgACNnoZTlEkQKdiCHmqJzilc_Y7IFYhQgMhQs132Aff-O/exec'
 };
