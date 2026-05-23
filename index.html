@@ -222,13 +222,14 @@
 }
 
         const API_CONFIG = window.API_CONFIG || {};
-        const PROXY_URL = API_CONFIG.PROXY_URL;
+        const PROXY_URL = API_CONFIG.PROXY_URL || 'https://script.google.com/a/macros/headlink.com/s/AKfycbzf_m5-K4fXhhV7sJjOqxAgACNnoZTlEkQKdiCHmqJzilc_Y7IFYhQgMhQs132Aff-O/exec';
 
         let sheetComments = {};
         let eventCommentMeta = {};
 
         function checkSetup() {
-            const configured = PROXY_URL && !PROXY_URL.includes('https://script.google.com/macros/s/AKfycbzf_m5-K4fXhhV7sJjOqxAgACNnoZTlEkQKdiCHmqJzilc_Y7IFYhQgMhQs132Aff-O/exec');
+            // Check if the URL has been changed from the generic placeholder
+            const configured = PROXY_URL && !PROXY_URL.includes('AKfycbzf_m5-K4fXhhV7sJjOqxAgACNnoZTlEkQKdiCHmqJzilc_Y7IFYhQgMhQs132Aff-O');
             const banner = document.getElementById('setup-banner');
             if (!banner) return;
             if (configured) banner.classList.add('hidden');
@@ -236,11 +237,11 @@
         }
 
         function handleAuthClick() {
-            // Simple check to ensure proxy is configured
-            if (PROXY_URL.includes('https://script.google.com/macros/s/AKfycbzf_m5-K4fXhhV7sJjOqxAgACNnoZTlEkQKdiCHmqJzilc_Y7IFYhQgMhQs132Aff-O/exec')) {
+            if (PROXY_URL.includes('AKfycbzf_m5-K4fXhhV7sJjOqxAgACNnoZTlEkQKdiCHmqJzilc_Y7IFYhQgMhQs132Aff-O')) {
                 alert("Please add your Google Apps Script proxy URL to config.js and reload the page.");
                 return;
             }
+            // Opening the Proxy URL directly allows the user to grant permissions to the script
             window.open(PROXY_URL, '_blank');
             document.getElementById('user-display').innerText = 'Proxy Connected';
         }
@@ -325,8 +326,9 @@
         async function syncCommentToSheet(eventKey, comment) {
             const meta = eventCommentMeta[eventKey] || {};
             try {
-                await fetch(PROXY_URL, {
+                const response = await fetch(PROXY_URL, {
                     method: 'POST',
+                    mode: 'no-cors', // Apps Script requires no-cors for simple POST to avoid OPTIONS preflight
                     body: JSON.stringify({
                         action: 'saveComment',
                         key: eventKey,

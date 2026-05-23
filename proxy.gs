@@ -43,7 +43,12 @@ function doGet(e) {
 }
 
 function doPost(e) {
-  const data = e.postData ? JSON.parse(e.postData.contents) : {};
+  let data;
+  try {
+    data = e.postData ? JSON.parse(e.postData.contents) : {};
+  } catch (f) {
+    return jsonResponse({ error: "Invalid JSON payload" }, 400);
+  }
   
   try {
     if (data.action === 'saveComment') {
