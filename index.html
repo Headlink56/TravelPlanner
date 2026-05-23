@@ -228,20 +228,12 @@
         let eventCommentMeta = {};
 
         function checkSetup() {
-            // Check if the URL has been changed from the generic placeholder
-            const configured = PROXY_URL && !PROXY_URL.includes('AKfycbzf_m5-K4fXhhV7sJjOqxAgACNnoZTlEkQKdiCHmqJzilc_Y7IFYhQgMhQs132Aff-O');
-            const banner = document.getElementById('setup-banner');
-            if (!banner) return;
-            if (configured) banner.classList.add('hidden');
-            else banner.classList.remove('hidden');
+            console.log("Current Proxy URL:", PROXY_URL);
         }
 
         function handleAuthClick() {
-            if (PROXY_URL.includes('AKfycbzf_m5-K4fXhhV7sJjOqxAgACNnoZTlEkQKdiCHmqJzilc_Y7IFYhQgMhQs132Aff-O')) {
-                alert("Please add your Google Apps Script proxy URL to config.js and reload the page.");
-                return;
-            }
-            // Opening the Proxy URL directly allows the user to grant permissions to the script
+            // Opening the Proxy URL directly allows the user to grant permissions to the script 
+            // This is REQUIRED before background fetches will work.
             window.open(PROXY_URL, '_blank');
             document.getElementById('user-display').innerText = 'Proxy Connected';
         }
@@ -250,6 +242,8 @@
             toggleSyncOverlay(true, "Fetching Budget Rows...");
             try {
                 const response = await fetch(`${PROXY_URL}?action=getBudget`);
+                if (!response.ok) throw new Error(`HTTP Error: ${response.status}`);
+                
                 const values = await response.json();
                 if (!values || values.length === 0) return alert("No data found in your sheet.");
 
@@ -292,7 +286,10 @@
 
                 document.getElementById('total-spend-display').innerText = `$${total.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
                 document.getElementById('total-spend-display').classList.replace('text-slate-500', 'text-emerald-400');
-            } catch (err) { alert("Sheet Sync Error: " + err.message); }
+            } catch (err) { 
+                console.error("Sheet Sync Error:", err);
+                alert("Sheet Sync Error: " + err.message + ". Check console for details."); 
+            }
             toggleSyncOverlay(false);
         }
 
@@ -345,6 +342,8 @@
             sheetComments = await loadCommentsFromSheet();
             try {
                 const response = await fetch(`${PROXY_URL}?action=getCalendar`);
+                if (!response.ok) throw new Error(`HTTP Error: ${response.status}`);
+
                 const events = await response.json();
                 const container = document.getElementById('calendar-events-container');
                 if (events.length > 0) {
@@ -417,7 +416,10 @@
                         container.appendChild(div);
                     });
                 }
-            } catch (err) { alert("Calendar Sync Error: " + err.message); }
+            } catch (err) { 
+                console.error("Calendar Sync Error:", err);
+                alert("Calendar Sync Error: " + err.message + ". Check console for details."); 
+            }
             toggleSyncOverlay(false);
         }
 
