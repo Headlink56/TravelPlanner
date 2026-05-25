@@ -592,7 +592,7 @@ async function showNearbyAttractions(location) {
     
     if (data.error) {
       console.error("Gemini Proxy Error:", data.error);
-      throw new Error(data.error);
+      throw new Error(data.error.message || JSON.stringify(data.error));
     }
 
     const aiText = data.candidates[0].content.parts[0].text;
