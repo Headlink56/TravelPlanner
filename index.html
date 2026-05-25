@@ -624,7 +624,7 @@ async function showNearbyAttractions(location) {
     resultsDiv.innerHTML = `
       <div class="p-3 bg-red-50 border border-red-100 rounded-lg">
         <p class="text-red-600 font-bold text-[12px] mb-1">TRIP ADVISOR AI ERROR</p>
-        <p class="text-red-500 font-mono text-[9px] leading-tight">${err.message}</p>
+        <p class="text-red-500 font-mono text-[9px] leading-tight">${typeof err === 'object' ? JSON.stringify(err) : err}</p>
       </div>
     `;
   }
@@ -671,4 +671,4 @@ async function showNearbyAttractions(location) {
         });
     </script>
 </body>
-</html>
+</html> 
