@@ -305,21 +305,22 @@
         }
 
         function handleAuthClick(callback) {
-            if (!tokenClient) return;
+        if (!tokenClient) return;
 
-            // If we already have a valid token, just run the requested action
-            if (gapi.client.getToken() !== null) {
-                if (typeof callback === 'function') callback();
-                else fetchSheetActuals();
-                return;
-            }
+        // If we already have a valid token, just run the requested action
+        if (gapi.client.getToken() !== null) {
+            if (typeof callback === 'function') callback();
+            else fetchSheetActuals();
+            return;
+        }
 
-            tokenClient.callback = async (resp) => {
+        // 1. Define what happens AFTER a successful login
+        tokenClient.callback = async (resp) => {
             if (resp.error !== undefined) {
             throw (resp);
             }
 
-            // NEW: Save the token to local storage so it survives page reloads
+            // Save the token to local storage so it survives page reloads
             localStorage.setItem('gapi_token', JSON.stringify(gapi.client.getToken()));
             localStorage.setItem('gapi_token_time', Date.now());
 
@@ -328,7 +329,10 @@
 
             if (typeof callback === 'function') await callback();
             else await fetchSheetActuals();
-            };
+        };
+
+        // 2. CRITICAL FIX: Actually launch the Google login popup!
+        tokenClient.requestAccessToken(); 
         }
 
         async function fetchSheetActuals() {
