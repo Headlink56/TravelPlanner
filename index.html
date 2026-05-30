@@ -509,9 +509,34 @@
         }
 
         function switchTab(tabName) {
-            const sections = ['itinerary-content', 'budget-content', 'diary-content', 'ai-content'];
-            sections.forEach(s => document.getElementById(s).classList.add('hidden'));
-            document.getElementById(tabName + '-content').classList.remove('hidden');
+        // Your existing tab visibility toggle logic...
+        const sections = ['itinerary-content', 'budget-content', 'diary-content', 'ai-content'];
+        sections.forEach(s => document.getElementById(s).classList.add('hidden'));
+        document.getElementById(tabName + '-content').classList.remove('hidden');
+
+        // Trigger automation automatically upon entering the budget viewport
+        if (tabName === 'budget') {
+            triggerGmailExpenseSync();
+        }
+        }
+
+        function triggerGmailExpenseSync() {
+        console.log("Checking for fresh Capital One receipts...");
+        
+        // Uses your established Apps Script Web App Proxy link
+        fetch(PROXY_URL, {
+            method: 'POST',
+            body: JSON.stringify({ action: 'syncCapitalOne' })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.status === "success") {
+            console.log("Gmail items synced! Refreshing sheet view...");
+            // Calls your existing function that repopulates the UI table rows
+            fetchSheetActuals(); 
+            }
+        })
+        .catch(err => console.error("Sync error: ", err));
         }
 
         function logActivity(activity) {
