@@ -29,13 +29,13 @@
             <svg id="ai-spinner" class="text-blue-600 sync-animation" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/><path d="M3 12a9 9 0 0 0 9 9 9.75 9.75 0 0 0 6.74-2.74L21 16"/><path d="M16 16h5v5"/></svg>
             <p id="ai-search-status" class="text-sm text-slate-600 text-center">Searching for attractions near...</p>
             <div id="ai-search-results" class="text-sm text-slate-700 leading-relaxed max-h-60 overflow-y-auto w-full p-2 bg-slate-50 rounded hidden"></div>
-            <button onclick="hideAiSearchOverlay()" class="bg-blue-600 text-white text-[12px] px-4 py-2 rounded-full font-bold uppercase mt-4">Close</button>
+            <button onclick="hideAiSearchOverlay()" class="bg-blue-600 text-white text-sm px-4 py-2 rounded-full font-bold uppercase mt-4">Close</button>
         </div>
     </div>
 
     <!-- SETUP INSTRUCTIONS OVERLAY (Only visible if Keys are missing) -->
     <div id="setup-banner" class="bg-amber-50 border-b border-amber-200 p-3 text-center hidden">
-        <p class="text-[12px] text-amber-700 font-bold uppercase tracking-tight">Step 4: Paste your API Key & Client ID into the code below to enable live sync</p>
+        <p class="text-sm text-amber-700 font-bold uppercase tracking-tight">Step 4: Paste your API Key & Client ID into the code below to enable live sync</p>
     </div>
 
     <!-- Sync Overlay -->
@@ -53,10 +53,10 @@
             <p class="text-sm text-slate-500">June 6 — June 26, 2026</p>
         </div>
         <div class="flex flex-col items-end gap-1">
-            <button id="auth-button" onclick="handleAuthClick()" disabled class="bg-blue-600 hover:bg-blue-700 text-white text-[14px] px-3 py-1.5 rounded-full font-bold flex items-center gap-1 transition-colors shadow-sm opacity-50 cursor-not-allowed">
+            <button id="auth-button" onclick="handleAuthClick()" disabled class="bg-blue-600 hover:bg-blue-700 text-white text-base px-3 py-1.5 rounded-full font-bold flex items-center gap-1 transition-colors shadow-sm opacity-50 cursor-not-allowed">
                 Login with Google
             </button>
-            <span id="user-display" class="text-[9px] text-slate-400 font-medium tracking-tight italic">Authorization Required</span>
+            <span id="user-display" class="text-xs text-slate-400 font-medium tracking-tight italic">Authorization Required</span>
         </div>
     </header>
 
@@ -76,11 +76,11 @@
             <div class="flex justify-between items-center mb-4">
                 <h2 class="font-semibold text-lg">Travel Plan</h2>
                 <div class="flex gap-2">
-                    <button id="calendar-sync-btn" onclick="fetchCalendarEvents()" disabled class="text-[14px] font-bold text-blue-600 bg-blue-50 px-2 py-1 rounded border border-blue-100 flex items-center gap-1 opacity-50 cursor-not-allowed">
+                    <button id="calendar-sync-btn" onclick="fetchCalendarEvents()" disabled class="text-base font-bold text-blue-600 bg-blue-50 px-2 py-1 rounded border border-blue-100 flex items-center gap-1 opacity-50 cursor-not-allowed">
                         <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>
                         Update
                     </button>
-                    <button onclick="exportItineraryToPdf()" class="text-[14px] font-bold text-slate-600 bg-slate-50 px-2 py-1 rounded border border-slate-100 flex items-center gap-1 hover:bg-slate-100 transition-colors">
+                    <button onclick="exportItineraryToPdf()" class="text-base font-bold text-slate-600 bg-slate-50 px-2 py-1 rounded border border-slate-100 flex items-center gap-1 hover:bg-slate-100 transition-colors">
                         <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
                         Export PDF
                     </button>
@@ -89,46 +89,46 @@
 
             <div id="calendar-events-container" class="space-y-4">
                 <!-- Live Calendar Events will prepend here -->
-                <div class="bg-white p-4 rounded-xl border border-slate-100 shadow-sm opacity-50 italic text-[14px] text-center">
+                <div class="bg-white p-4 rounded-xl border border-slate-100 shadow-sm opacity-50 italic text-base text-center">
                     Authorize and click "Update from Calendar" to pull live events...
                 </div>
 
                 <!-- Verified Itinerary Placeholders -->
                 <div class="bg-white p-4 rounded-xl border-l-4 border-cyan-400 shadow-sm">
-                    <div class="flex justify-between text-[12px] font-bold text-cyan-600 mb-1 uppercase">Flight Record</div>
+                    <div class="flex justify-between text-sm font-bold text-cyan-600 mb-1 uppercase">Flight Record</div>
                     <h4 class="font-bold text-slate-800">LAX → HNL (United)</h4>
                     <p class="text-sm text-slate-500">June 6 • 18:45 Departure</p>
                     <div class="mt-3 pt-3 border-t border-slate-50 flex justify-between items-center">
-                        <button onclick="toggleComment('p_flight')" class="text-[14px] font-bold text-slate-400 hover:text-cyan-600 flex items-center gap-1 uppercase transition-colors">
+                        <button onclick="toggleComment('p_flight')" class="text-base font-bold text-slate-400 hover:text-cyan-600 flex items-center gap-1 uppercase transition-colors">
                             <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
                             Comment
                         </button>
                     </div>
-                    <div id="display-p_flight" class="mt-2 text-[14px] text-slate-600 italic bg-slate-50 p-2 rounded hidden"></div>
+                    <div id="display-p_flight" class="mt-2 text-base text-slate-600 italic bg-slate-50 p-2 rounded hidden"></div>
                     <div id="panel-p_flight" class="hidden mt-2 space-y-2">
-                        <textarea id="input-p_flight" class="w-full text-[14px] p-2 rounded border border-slate-200 outline-none h-16" placeholder="Write a comment..."></textarea>
-                        <button onclick="saveActivityComment('p_flight')" class="bg-cyan-600 text-white text-[12px] px-3 py-1 rounded-lg font-bold uppercase">Save</button>
+                        <textarea id="input-p_flight" class="w-full text-base p-2 rounded border border-slate-200 outline-none h-16" placeholder="Write a comment..."></textarea>
+                        <button onclick="saveActivityComment('p_flight')" class="bg-cyan-600 text-white text-sm px-3 py-1 rounded-lg font-bold uppercase">Save</button>
                     </div>
                 </div>
 
                 <div class="bg-white p-4 rounded-xl border-l-4 border-emerald-400 shadow-sm">
-                    <div class="flex justify-between text-[14px] font-bold text-emerald-600 mb-1 uppercase">Accommodation</div>
+                    <div class="flex justify-between text-base font-bold text-emerald-600 mb-1 uppercase">Accommodation</div>
                     <h4 class="font-bold text-slate-800">Island Colony Waikiki</h4>
                     <p class="text-sm text-slate-500">June 6 - 10 Stay</p>
                     <div class="mt-3 pt-3 border-t border-slate-50 flex justify-between items-center">
-                        <button onclick="toggleComment('p_hotel')" class="text-[14px] font-bold text-slate-400 hover:text-emerald-600 flex items-center gap-1 uppercase transition-colors">
+                        <button onclick="toggleComment('p_hotel')" class="text-base font-bold text-slate-400 hover:text-emerald-600 flex items-center gap-1 uppercase transition-colors">
                             <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
                             Comment
                         </button>
-                        <button onclick="showNearbyAttractions('Island Colony Waikiki, Honolulu')" class="text-[14px] font-bold text-slate-400 hover:text-purple-600 flex items-center gap-1 uppercase transition-colors">
+                        <button onclick="showNearbyAttractions('Island Colony Waikiki, Honolulu')" class="text-base font-bold text-slate-400 hover:text-purple-600 flex items-center gap-1 uppercase transition-colors">
                             <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
                             AI Nearby
                         </button>
                     </div>
-                    <div id="display-p_hotel" class="mt-2 text-[14px] text-slate-600 italic bg-slate-50 p-2 rounded hidden"></div>
+                    <div id="display-p_hotel" class="mt-2 text-base text-slate-600 italic bg-slate-50 p-2 rounded hidden"></div>
                     <div id="panel-p_hotel" class="hidden mt-2 space-y-2">
-                        <textarea id="input-p_hotel" class="w-full text-[14px] p-2 rounded border border-slate-200 outline-none h-16" placeholder="Write a comment..."></textarea>
-                        <button onclick="saveActivityComment('p_hotel')" class="bg-emerald-600 text-white text-[14px] px-3 py-1 rounded-lg font-bold uppercase">Save</button>
+                        <textarea id="input-p_hotel" class="w-full text-base p-2 rounded border border-slate-200 outline-none h-16" placeholder="Write a comment..."></textarea>
+                        <button onclick="saveActivityComment('p_hotel')" class="bg-emerald-600 text-white text-base px-3 py-1 rounded-lg font-bold uppercase">Save</button>
                     </div>
                 </div>
             </div>
@@ -138,30 +138,30 @@
         <section id="budget-content" class="hidden">
             <div class="flex justify-between items-center mb-4">
                 <h2 class="font-semibold text-lg">Financial Actuals</h2>
-                <button id="budget-sync-btn" onclick="fetchSheetActuals()" disabled class="text-[14px] font-bold text-blue-600 bg-blue-50 px-3 py-1 rounded-full border border-blue-100 opacity-50 cursor-not-allowed">Fetch Actuals</button>
+                <button id="budget-sync-btn" onclick="fetchSheetActuals()" disabled class="text-base font-bold text-blue-600 bg-blue-50 px-3 py-1 rounded-full border border-blue-100 opacity-50 cursor-not-allowed">Fetch Actuals</button>
             </div>
             
             <div id="live-budget-summary" class="bg-slate-900 text-white p-6 rounded-2xl shadow-lg mb-6 text-center">
-                <p class="text-[14px] opacity-60 mb-2 uppercase tracking-widest font-bold">Total Actual Spend</p>
+                <p class="text-base opacity-60 mb-2 uppercase tracking-widest font-bold">Total Actual Spend</p>
                 <h3 id="total-spend-display" class="text-3xl font-bold text-slate-500">--.--</h3>
             </div>
 
             <div class="overflow-x-auto rounded-xl border bg-white shadow-sm">
                 <table class="w-full text-left border-collapse">
                     <thead class="bg-slate-50 border-b">
-                        <tr class="text-[14px] font-bold text-slate-400 uppercase">
+                        <tr class="text-base font-bold text-slate-400 uppercase">
                             <th class="px-4 py-3">Activity Date</th>
                             <th class="px-4 py-3">Category</th>
                             <th class="px-4 py-3">Item</th>
                             <th class="px-4 py-3 text-right">Actual ($)</th>
                         </tr>
                     </thead>
-                    <tbody class="text-[12px] divide-y" id="actuals-body">
+                    <tbody class="text-sm divide-y" id="actuals-body">
                         <tr><td colspan="4" class="px-4 py-12 text-center text-slate-400 italic">No data synced yet. Login and sync to pull from Google Sheets.</td></tr>
                     </tbody>
                 </table>
             </div>
-            <p class="text-[12px] text-slate-400 mt-4 text-center">Pulling from: <span class="font-mono">1jghXxfXv8ia...KX-No</span></p>
+            <p class="text-sm text-slate-400 mt-4 text-center">Pulling from: <span class="font-mono">1jghXxfXv8ia...KX-No</span></p>
         </section>
 
         <!-- DIARY SECTION -->
@@ -171,7 +171,7 @@
                 <h3 id="diary-title" class="font-bold text-slate-700 mb-3 text-sm uppercase tracking-wider italic">Vlog Note Entry</h3>
                 <textarea id="diary-text" class="w-full border-none focus:ring-0 text-sm h-32 placeholder-slate-300 bg-slate-50 rounded-xl p-3" placeholder="What happened today? Link to your Photos here."></textarea>
                 <div class="flex justify-between items-center mt-4 pt-4 border-t border-slate-100">
-                    <button class="text-blue-600 flex items-center gap-1 text-[14px] font-bold bg-blue-50 px-3 py-2 rounded-lg uppercase">Attach Photo Reference</button>
+                    <button class="text-blue-600 flex items-center gap-1 text-base font-bold bg-blue-50 px-3 py-2 rounded-lg uppercase">Attach Photo Reference</button>
                     <button onclick="saveNote()" class="bg-blue-600 text-white px-5 py-2.5 rounded-xl text-sm font-bold shadow-md">Save Highlight</button>
                 </div>
             </div>
@@ -182,7 +182,7 @@
             <h2 class="font-semibold text-lg mb-4">AI Travel Insights</h2>
             <div class="bg-blue-50 p-4 rounded-xl border border-blue-200">
                 <h4 class="font-bold text-sm text-blue-700 mb-2 uppercase tracking-tight">Visa & Transit: 240-Hour Rule</h4>
-                <p class="text-[11px] text-slate-700 leading-relaxed italic">
+                <p class="text-sm text-slate-700 leading-relaxed italic">
                     Note: Your entry via **Guangzhou Baiyun (CAN)** on June 22nd is fully eligible for China's 240-hour visa-free transit policy. Ensure you show your confirmed onward ticket to **Hong Kong West Kowloon** for processing.
                 </p>
             </div>
@@ -191,24 +191,24 @@
 
     <!-- Bottom Navigation -->
     <div class="fixed bottom-0 left-0 right-0 glass border-t p-4 flex justify-around items-center z-50">
-        <button onclick="switchTab('itinerary')" class="flex flex-col items-center gap-1 text-blue-600">
+        <button onclick="switchTab('itinerary')" class="flex flex-col items-center gap-1 text-blue-600 py-2 px-3">
             <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="3 6 9 3 15 6 21 3 21 18 15 21 9 18 3 21"/><line x1="9" y1="3" x2="9" y2="18"/><line x1="15" y1="6" x2="15" y2="21"/></svg>
-            <span class="text-[9px] font-bold">Itinerary</span>
+            <span class="text-xs font-bold">Itinerary</span>
         </button>
         <button onclick="switchTab('budget')" class="flex flex-col items-center gap-1 text-slate-400">
             <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
-            <span class="text-[9px]">Budget</span>
+            <span class="text-xs">Budget</span>
         </button>
         <button id="nav-auth-btn" onclick="handleAuthClick()" disabled class="bg-blue-600 w-12 h-12 rounded-full flex items-center justify-center text-white shadow-lg -mt-10 border-4 border-white transition-transform active:scale-95 opacity-50 cursor-not-allowed">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>
         </button>
         <button onclick="switchTab('diary')" class="flex flex-col items-center gap-1 text-slate-400">
             <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
-            <span class="text-[9px]">Vlog</span>
+            <span class="text-xs">Vlog</span>
         </button>
         <button onclick="switchTab('ai')" class="flex flex-col items-center gap-1 text-slate-400">
             <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/></svg>
-            <span class="text-[9px]">Advice</span>
+            <span class="text-xs">Advice</span>
         </button>
     </div>
 
@@ -255,18 +255,40 @@
             }
         }
 
-        function checkInitialization() {
+            function checkInitialization() {
             if (gapiInited && gisInited) {
                 const btnIds = ['auth-button', 'calendar-sync-btn', 'budget-sync-btn', 'nav-auth-btn'];
                 btnIds.forEach(id => {
-                    const btn = document.getElementById(id);
-                    if (btn) {
-                        btn.disabled = false;
-                        btn.classList.remove('opacity-50', 'cursor-not-allowed');
-                    }
+                const btn = document.getElementById(id);
+                if (btn) {
+                    btn.disabled = false;
+                    btn.classList.remove('opacity-50', 'cursor-not-allowed');
+                }
                 });
+
+                // NEW: Restore your session if you refresh the page!
+                const savedToken = localStorage.getItem('gapi_token');
+                const tokenTime = localStorage.getItem('gapi_token_time');
+                
+                if (savedToken && tokenTime) {
+                // Check if the token is less than 55 minutes old
+                if (Date.now() - parseInt(tokenTime) < 55 * 60 * 1000) {
+                    gapi.client.setToken(JSON.parse(savedToken));
+                    document.getElementById('auth-button').innerText = 'Sync Active';
+                    document.getElementById('user-display').innerText = 'Account Connected';
+                    
+                    // Auto-pull your budget data if you land on the budget tab
+                    if (!document.getElementById('budget-content').classList.contains('hidden')) {
+                    fetchSheetActuals(); 
+                    }
+                } else {
+                    // Token expired, clear it out
+                    localStorage.removeItem('gapi_token');
+                    localStorage.removeItem('gapi_token_time');
+                }
+                }
             }
-        }
+            }
 
         function checkSetup() {
             if (API_KEY.startsWith('AIza') && CLIENT_ID.includes('apps.googleusercontent.com')) {
@@ -293,15 +315,20 @@
             }
 
             tokenClient.callback = async (resp) => {
-                if (resp.error !== undefined) { throw (resp); }
-                document.getElementById('auth-button').innerText = 'Sync Active';
-                document.getElementById('user-display').innerText = 'Account Connected';
-                
-                if (typeof callback === 'function') await callback();
-                else await fetchSheetActuals();
+            if (resp.error !== undefined) {
+            throw (resp);
+            }
+
+            // NEW: Save the token to local storage so it survives page reloads
+            localStorage.setItem('gapi_token', JSON.stringify(gapi.client.getToken()));
+            localStorage.setItem('gapi_token_time', Date.now());
+
+            document.getElementById('auth-button').innerText = 'Sync Active';
+            document.getElementById('user-display').innerText = 'Account Connected';
+
+            if (typeof callback === 'function') await callback();
+            else await fetchSheetActuals();
             };
-            // Removing prompt: 'consent' allows the session to persist across syncs
-            tokenClient.requestAccessToken({ prompt: '' });
         }
 
         async function fetchSheetActuals() {
@@ -446,7 +473,7 @@
                         const isLodging = isLodgingEvent(event);
                         const locationForAI = event.location ? event.location.split(',')[0].trim() : event.summary;
                         const aiButtonHtml = isLodging && event.location ? `
-                            <button onclick="showNearbyAttractions('${locationForAI}')" class="text-[12px] font-bold text-slate-400 hover:text-purple-600 flex items-center gap-1 uppercase transition-colors">
+                            <button onclick="showNearbyAttractions('${locationForAI}')" class="text-sm font-bold text-slate-400 hover:text-purple-600 flex items-center gap-1 uppercase transition-colors">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
                                 AI Nearby
                             </button>` : '';
@@ -464,7 +491,7 @@
                             </div>` : '';
 
                         const descriptionHtml = event.description ? `
-                         <div class="mt-2 pt-2 border-t border-blue-100/50 text-[12px] text-slate-600 leading-relaxed">
+                         <div class="mt-2 pt-2 border-t border-blue-100/50 text-sm text-slate-600 leading-relaxed">
                          ${activateLinks(event.description)}
                          </div>` : '';
 
@@ -480,18 +507,18 @@
                             ${locationHtml}
                             ${descriptionHtml}
                             <div class="mt-3 pt-3 border-t border-blue-100/30 flex justify-between items-center">
-                                <button onclick="toggleComment('${eventKey}')" class="text-[12px] font-bold text-slate-400 hover:text-blue-600 flex items-center gap-1 uppercase transition-colors">
+                                <button onclick="toggleComment('${eventKey}')" class="text-sm font-bold text-slate-400 hover:text-blue-600 flex items-center gap-1 uppercase transition-colors">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
                                     Comment
                                 </button>
                                 ${aiButtonHtml}
                             </div>
-                            <div id="display-${eventKey}" class="mt-2 text-[12px] text-slate-600 italic bg-white/50 p-2 rounded ${savedComment ? '' : 'hidden'}">
+                            <div id="display-${eventKey}" class="mt-2 text-sm text-slate-600 italic bg-white/50 p-2 rounded ${savedComment ? '' : 'hidden'}">
                                 "${savedComment}"
                             </div>
                             <div id="panel-${eventKey}" class="hidden mt-2 space-y-2">
-                                <textarea id="input-${eventKey}" class="w-full text-[12px] p-2 rounded border border-blue-200 outline-none h-16 focus:ring-1 focus:ring-blue-400" placeholder="Add a note...">${savedComment}</textarea>
-                                <button onclick="saveActivityComment('${eventKey}')" class="bg-blue-600 text-white text-[9px] px-3 py-1 rounded-lg font-bold uppercase shadow-sm">Save Note</button>
+                                <textarea id="input-${eventKey}" class="w-full text-sm p-2 rounded border border-blue-200 outline-none h-16 focus:ring-1 focus:ring-blue-400" placeholder="Add a note...">${savedComment}</textarea>
+                                <button onclick="saveActivityComment('${eventKey}')" class="bg-blue-600 text-white text-xs px-3 py-1 rounded-lg font-bold uppercase shadow-sm">Save Note</button>
                             </div>
                         `;
                         container.appendChild(div);
@@ -648,8 +675,8 @@ async function showNearbyAttractions(location) {
     resultsDiv.classList.remove('hidden');
     resultsDiv.innerHTML = `
       <div class="p-3 bg-red-50 border border-red-100 rounded-lg">
-        <p class="text-red-600 font-bold text-[12px] mb-1">TRIP ADVISOR AI ERROR</p>
-        <p class="text-red-500 font-mono text-[9px] leading-tight">${typeof err === 'object' ? JSON.stringify(err) : err}</p>
+        <p class="text-red-600 font-bold text-sm mb-1">TRIP ADVISOR AI ERROR</p>
+        <p class="text-red-500 font-mono text-xs leading-tight">${typeof err === 'object' ? JSON.stringify(err) : err}</p>
       </div>
     `;
   }
