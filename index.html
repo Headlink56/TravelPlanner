@@ -340,8 +340,8 @@
             toggleSyncOverlay(true, "Fetching Budget Rows...");
             try {
                 const response = await gapi.client.sheets.spreadsheets.values.get({
-                    spreadsheetId: SPREADSHEET_ID,
-                    range: 'A1:G100', // Pulling from the first sheet with a wider range to find headers automatically
+                  spreadsheetId: SPREADSHEET_ID,
+                  range: 'A:G', // Now pulls ALL rows dynamically
                 });
                 const values = response.result.values;
                 if (!values || values.length === 0) return alert("No data found in your sheet.");
